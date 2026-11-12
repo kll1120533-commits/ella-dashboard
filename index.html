@@ -78,6 +78,45 @@
   .panel h2{ font-size:14.5px; font-weight:700; margin:0 0 2px; letter-spacing:-.1px; }
   .panel .ph{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; gap:12px; }
   .panel .pnote{ color:var(--muted); font-size:12px; }
+
+  /* ── 바로가기 (프로그램 열기) ───────────────────────────── */
+  .lp-panel{ margin-bottom:20px; }
+  .lp-grid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+  .lp-name{ display:block; font-size:18px; font-weight:700; letter-spacing:-.2px; }
+  .lp-desc{ display:block; margin-top:5px; font-size:12.5px; color:var(--muted); line-height:1.5; }
+
+  .lp-btn{ display:flex; flex-direction:column; min-height:118px; padding:18px;
+           border:1px solid var(--line); border-radius:13px; background:var(--panel);
+           color:var(--ink); text-decoration:none;
+           transition:border-color .14s ease, box-shadow .14s ease, transform .14s ease; }
+  .lp-btn:hover{ border-color:var(--blue); box-shadow:var(--shadow2); transform:translateY(-2px); }
+  .lp-btn:active{ transform:translateY(0); }
+  .lp-btn:focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+  .lp-go{ margin-top:auto; padding-top:14px; font-size:12.5px; font-weight:600; color:var(--muted); }
+  .lp-btn:hover .lp-go{ color:var(--blue); }
+
+  .lp-group{ padding:18px; border:1px solid var(--line); border-radius:13px;
+             background:var(--panel); grid-column:span 2; }
+  @media (max-width:720px){ .lp-group{ grid-column:span 1; } }
+  .lp-two{ display:grid; gap:10px; grid-template-columns:1fr 1fr; margin-top:14px; }
+  @media (max-width:460px){ .lp-two{ grid-template-columns:1fr; } }
+  .lp-sub{ display:block; padding:13px 14px; border-radius:10px; text-decoration:none;
+           border:1px solid var(--line); background:var(--soft); color:var(--ink);
+           transition:border-color .14s ease, background .14s ease; }
+  .lp-sub:hover{ border-color:var(--blue); background:var(--bluebg); }
+  .lp-sub:focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+  .lp-sub b{ display:block; font-size:14.5px; font-weight:700; }
+  .lp-sub small{ display:block; margin-top:3px; font-size:11.5px; color:var(--muted); line-height:1.45; }
+  .lp-sub.soon{ border-style:dashed; background:transparent; pointer-events:none; }
+  .lp-sub.soon b{ color:var(--faint); }
+  .lp-sub.soon small{ color:var(--faint); }
+
+  .lp-help{ font-size:12.5px; line-height:1.7; color:var(--muted); }
+  .lp-help b{ color:var(--ink); font-weight:600; }
+  .lp-help ol{ margin:8px 0 2px; padding-left:18px; }
+  .lp-help li{ margin:4px 0; }
+  .lp-help code{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px;
+                 background:var(--soft); padding:1px 5px; border-radius:4px; color:var(--ink); }
   .legend{ display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; font-size:12px;
            color:#4B5563; justify-content:center; }
   .legend i{ display:inline-block; width:10px; height:10px; border-radius:3px;
@@ -279,6 +318,8 @@
       <div class="bt"><b>ELLA</b><span>웹디 워크스페이스</span></div>
     </div>
     <nav class="nav">
+      <div class="lbl">바로가기</div>
+      <button class="nav-i" data-sec="바로가기" onclick="섹션('바로가기')">프로그램 열기</button>
       <div class="lbl">매출</div>
       <button class="nav-i on" data-sec="요약" onclick="섹션('요약')">매출 요약</button>
       <button class="nav-i" data-sec="월별" onclick="섹션('월별')">월별 상세</button>
@@ -308,6 +349,62 @@
     </header>
 
     <div class="mtabs" id="monthBar"></div>
+
+    <!-- ── 바로가기: 누르면 그 컴퓨터의 프로그램이 켜집니다 ───────── -->
+    <section id="sec-바로가기" class="sec" style="display:none">
+
+      <div class="panel lp-panel">
+        <div class="ph"><h2>보정</h2><span class="pnote">사진 보정 · 썸네일</span></div>
+        <div class="lp-grid">
+          <a class="lp-btn" href="ellaauto://가방">
+            <span class="lp-name">가방</span>
+            <span class="lp-desc">엘라부티크 자동화 프로그램</span>
+            <span class="lp-go">열기 →</span>
+          </a>
+
+          <div class="lp-group">
+            <span class="lp-name">악세</span>
+            <span class="lp-desc">두 가지 중에서 고르세요</span>
+            <div class="lp-two">
+              <a class="lp-sub soon" href="ellaauto://악세사리" aria-disabled="true">
+                <b>악세사리</b><small>준비 중 — 팀원 프로그램</small>
+              </a>
+              <a class="lp-sub soon" href="ellaauto://의류신발" aria-disabled="true">
+                <b>의류 · 신발</b><small>준비 중 — 팀원 프로그램</small>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel lp-panel">
+        <div class="ph"><h2>플랫폼</h2><span class="pnote">홈페이지 · 채널</span></div>
+        <div class="lp-grid">
+          <a class="lp-btn" href="ellaauto://업로드">
+            <span class="lp-name">업로드</span>
+            <span class="lp-desc">어드민 · 채널에 상품 올리기</span>
+            <span class="lp-go">열기 →</span>
+          </a>
+          <a class="lp-btn" href="ellaauto://판매완료">
+            <span class="lp-name">판매완료</span>
+            <span class="lp-desc">팔린 상품 내리고 기록 남기기</span>
+            <span class="lp-go">열기 →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="panel lp-panel lp-help">
+        <div class="ph"><h2>안 켜질 때</h2></div>
+        버튼은 <b>그 컴퓨터에 깔린 프로그램</b>을 켭니다. 처음 쓰는 컴퓨터라면 한 번만 준비가 필요합니다.
+        <ol>
+          <li>바탕화면의 <b>[엘라부티크 웹 디자인 자동화]</b> 를 한 번 켰다 끄세요. (이때 저절로 준비됩니다)</li>
+          <li>그래도 안 되면 프로그램 폴더의 <code>주소등록.py</code> 를 두 번 누르세요.</li>
+          <li>브라우저가 <b>“이 사이트에서 열겠습니까?”</b> 라고 물으면 <b>열기</b>를 누르고,
+              <b>“항상 허용”</b> 에 체크해 두면 다음부터 안 물어봅니다.</li>
+        </ol>
+      </div>
+
+    </section>
 
     <section id="sec-요약" class="sec">
       <div class="cards" id="cards"></div>
@@ -674,9 +771,10 @@ function render(){ 카드들(); 막대차트(); 가로막대(); 누적막대(); 
 // ── 왼쪽 메뉴(섹션) 전환 ──
 let 섹 = "요약";
 const 섹제목 = {요약:"매출 요약", 월별:"월별 상세", 주간:"주간 매출",
-               업무:"업무보고", 디자인:"디자인 작업", 제품:"제품 관리"};
+               업무:"업무보고", 디자인:"디자인 작업", 제품:"제품 관리",
+               바로가기:"프로그램 열기"};
 function 섹션(s){ 섹=s;
-  for(const x of ["요약","월별","주간","업무","디자인","제품"]){
+  for(const x of ["요약","월별","주간","업무","디자인","제품","바로가기"]){
     const el=document.getElementById("sec-"+x); if(el) el.style.display=(x===s)?"":"none"; }
   document.querySelectorAll(".nav-i").forEach(function(b){
     b.classList.toggle("on", b.getAttribute("data-sec")===s); });
@@ -684,6 +782,16 @@ function 섹션(s){ 섹=s;
   그리기();
 }
 function 그리기(){
+  // 바로가기는 매출과 무관한 화면입니다 — 월 탭과 연도 고르기를 숨깁니다.
+  const _월바=document.getElementById("monthBar");
+  const _연도=document.getElementById("yearSel");
+  if(섹==="바로가기"){
+    if(_월바) _월바.style.display="none";
+    if(_연도) _연도.style.display="none";
+    return;
+  }
+  if(_월바) _월바.style.display="";
+  if(_연도) _연도.style.display="";
   if(섹==="제품"){ renderProduct(); return; }   // 제품은 월탭과 무관
   월탭();
   if(섹==="업무") renderKpi();
