@@ -113,6 +113,33 @@
   .lp-sub.soon b{ color:var(--faint); }
   .lp-sub.soon small{ color:var(--faint); }
 
+  .lp-why{ margin:0 0 14px; font-size:12.5px; line-height:1.7; color:var(--muted); }
+  .lp-why b{ color:var(--ink); font-weight:600; }
+  .lp-steps{ display:grid; gap:10px; }
+  .lp-step{ display:flex; align-items:flex-start; gap:12px; padding:14px 16px; min-width:0;
+            border:1px solid var(--line); border-radius:12px; background:var(--soft); }
+  .lp-stepno{ flex:0 0 22px; height:22px; border-radius:50%; margin-top:1px;
+              background:var(--bluebg); color:var(--blue);
+              font-size:12px; font-weight:800; display:grid; place-items:center; }
+  .lp-stepbody{ flex:1 1 auto; min-width:0; max-width:100%; }
+  .lp-stepbody b{ display:block; font-size:14px; font-weight:700; }
+  .lp-stepbody small{ display:block; margin-top:3px; font-size:12px;
+                      color:var(--muted); line-height:1.55; }
+  .lp-path{ display:block; margin-top:9px; padding:8px 10px; border-radius:7px;
+            background:var(--panel); border:1px solid var(--line); color:var(--ink);
+            font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11.5px;
+            overflow-x:auto; white-space:nowrap; }
+  .lp-copy{ flex:0 0 auto; margin-top:1px; padding:8px 13px; border-radius:9px; cursor:pointer;
+            border:1px solid var(--blue); background:var(--blue); color:#fff;
+            font-size:12.5px; font-weight:700; font-family:inherit;
+            transition:background .14s ease, border-color .14s ease; }
+  .lp-copy:hover{ background:var(--blue2); border-color:var(--blue2); }
+  .lp-copy.done{ background:var(--up); border-color:var(--up); }
+  @media (max-width:560px){
+    .lp-step{ flex-wrap:wrap; }
+    .lp-copy{ width:100%; }
+  }
+
   .lp-help{ font-size:12.5px; line-height:1.7; color:var(--muted); }
   .lp-help b{ color:var(--ink); font-weight:600; }
   .lp-help ol{ margin:8px 0 2px; padding-left:18px; }
@@ -395,14 +422,44 @@
         </div>
       </div>
 
+      <div class="panel lp-panel">
+        <div class="ph"><h2>처음 쓰는 컴퓨터</h2>
+          <span class="pnote">컴퓨터 한 대당 딱 한 번만</span></div>
+
+        <p class="lp-why">웹페이지가 프로그램을 직접 깔 수는 없습니다. 대신 <b>경로를 복사</b>해 드릴게요.
+          복사한 뒤 <b>Win + R</b> 을 누르고 <b>Ctrl + V</b> 로 붙여넣고 엔터만 치면 됩니다.</p>
+
+        <div class="lp-steps">
+          <div class="lp-step">
+            <div class="lp-stepno">1</div>
+            <div class="lp-stepbody">
+              <b>프로그램 설치하기</b>
+              <small>나스(Z:) 가 연결돼 있어야 합니다. 설치가 끝나면 프로그램이 저절로 켜집니다.</small>
+              <code class="lp-path" id="path설치">Z:\ellaboutique\★본사 2\엘라부티크_웹자동화\설치.bat</code>
+            </div>
+            <button class="lp-copy" onclick="바로가기복사('path설치',this)">경로 복사</button>
+          </div>
+
+          <div class="lp-step">
+            <div class="lp-stepno">2</div>
+            <div class="lp-stepbody">
+              <b>이미 깔려 있는데 위 버튼이 안 먹을 때</b>
+              <small>프로그램을 한 번 껐다 켜면 저절로 해결됩니다. 그래도 안 되면 이걸 두 번 누르세요.</small>
+              <code class="lp-path" id="path준비">%LOCALAPPDATA%\ella-auto\프로그램\웹버튼 준비.bat</code>
+            </div>
+            <button class="lp-copy" onclick="바로가기복사('path준비',this)">경로 복사</button>
+          </div>
+        </div>
+      </div>
+
       <div class="panel lp-panel lp-help">
-        <div class="ph"><h2>안 켜질 때</h2></div>
-        버튼은 <b>그 컴퓨터에 깔린 프로그램</b>을 켭니다. 처음 쓰는 컴퓨터라면 한 번만 준비가 필요합니다.
+        <div class="ph"><h2>그래도 안 될 때</h2></div>
         <ol>
-          <li>바탕화면의 <b>[엘라부티크 웹 디자인 자동화]</b> 를 한 번 켰다 끄세요. (이때 저절로 준비됩니다)</li>
-          <li>그래도 안 되면 프로그램 폴더의 <code>주소등록.py</code> 를 두 번 누르세요.</li>
-          <li>브라우저가 <b>“이 사이트에서 열겠습니까?”</b> 라고 물으면 <b>열기</b>를 누르고,
+          <li><b>아무 창도 안 뜨고 조용하다면</b> — 예전에 “취소”를 눌렀을 수 있습니다.
+              주소창 오른쪽 끝 아이콘이나 왼쪽 자물쇠를 눌러 차단된 항목을 풀어주세요.</li>
+          <li><b>“이 사이트에서 열겠습니까?” 라고 물으면</b> — <b>열기</b>를 누르고
               <b>“항상 허용”</b> 에 체크해 두면 다음부터 안 물어봅니다.</li>
+          <li><b>나스(Z:) 가 안 보이면</b> — 라이드라이브가 꺼져 있는 겁니다. 먼저 켜주세요.</li>
         </ol>
       </div>
 
@@ -783,6 +840,32 @@ function 섹션(s){ 섹=s;
   const t=document.getElementById("pageTitle"); if(t) t.textContent=섹제목[s]||"";
   그리기();
 }
+// 바로가기 화면의 [경로 복사] 단추
+function 바로가기복사(칸id, 단추){
+  const 글 = (document.getElementById(칸id)||{}).textContent || "";
+  const 알리기 = function(됨){
+    const 본래 = 단추.dataset.본래 || 단추.textContent;
+    단추.dataset.본래 = 본래;
+    단추.textContent = 됨 ? "복사했어요" : "복사 실패";
+    단추.classList.toggle("done", 됨);
+    setTimeout(function(){ 단추.textContent = 본래; 단추.classList.remove("done"); }, 1800);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(글).then(function(){ 알리기(true); },
+                                          function(){ 옛방식(); });
+  } else { 옛방식(); }
+  function 옛방식(){
+    // 오래된 브라우저 · http 로 열었을 때를 위한 길
+    try{
+      const 임시 = document.createElement("textarea");
+      임시.value = 글; 임시.style.position="fixed"; 임시.style.opacity="0";
+      document.body.appendChild(임시); 임시.select();
+      const 됨 = document.execCommand("copy");
+      document.body.removeChild(임시); 알리기(됨);
+    }catch(e){ 알리기(false); }
+  }
+}
+
 function 그리기(){
   // 바로가기는 매출과 무관한 화면입니다 — 월 탭과 연도 고르기를 숨깁니다.
   const _월바=document.getElementById("monthBar");
