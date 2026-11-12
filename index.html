@@ -135,6 +135,13 @@
             transition:background .14s ease, border-color .14s ease; }
   .lp-copy:hover{ background:var(--blue2); border-color:var(--blue2); }
   .lp-copy.done{ background:var(--up); border-color:var(--up); }
+  .lp-soontag{ flex:0 0 auto; margin-top:2px; padding:7px 12px; border-radius:9px;
+               border:1px dashed var(--line); color:var(--faint);
+               font-size:12px; font-weight:700; white-space:nowrap; }
+  .lp-step.soon{ background:transparent; border-style:dashed; }
+  .lp-step.soon .lp-stepno{ background:transparent; color:var(--faint);
+                            box-shadow:inset 0 0 0 1px var(--line); }
+  .lp-step.soon .lp-stepbody b{ color:var(--faint); }
   @media (max-width:560px){
     .lp-step{ flex-wrap:wrap; }
     .lp-copy{ width:100%; }
@@ -379,90 +386,11 @@
 
     <div class="mtabs" id="monthBar"></div>
 
-    <!-- ── 바로가기: 누르면 그 컴퓨터의 프로그램이 켜집니다 ───────── -->
+    <!-- ── 바로가기 ───────────────────────────────────────────
+         여기 내용은 아래 자바스크립트의 '바로가기설정' 하나로 만들어집니다.
+         버튼을 늘리거나 경로를 채우려면 그 칸만 고치면 됩니다.      -->
     <section id="sec-바로가기" class="sec" style="display:none">
-
-      <div class="panel lp-panel">
-        <div class="ph"><h2>보정</h2><span class="pnote">사진 보정 · 썸네일</span></div>
-        <div class="lp-grid">
-          <a class="lp-btn" href="ellaauto://가방">
-            <span class="lp-name">가방</span>
-            <span class="lp-desc">엘라부티크 자동화 프로그램</span>
-            <span class="lp-go">열기 →</span>
-          </a>
-
-          <div class="lp-group">
-            <span class="lp-name">악세</span>
-            <span class="lp-desc">두 가지 중에서 고르세요</span>
-            <div class="lp-two">
-              <a class="lp-sub soon" href="ellaauto://악세사리" aria-disabled="true">
-                <b>악세사리</b><small>준비 중 — 팀원 프로그램</small>
-              </a>
-              <a class="lp-sub soon" href="ellaauto://의류신발" aria-disabled="true">
-                <b>의류 · 신발</b><small>준비 중 — 팀원 프로그램</small>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel lp-panel">
-        <div class="ph"><h2>플랫폼</h2><span class="pnote">홈페이지 · 채널</span></div>
-        <div class="lp-grid">
-          <a class="lp-btn" href="ellaauto://업로드">
-            <span class="lp-name">업로드</span>
-            <span class="lp-desc">어드민 · 채널에 상품 올리기</span>
-            <span class="lp-go">열기 →</span>
-          </a>
-          <a class="lp-btn soon" href="ellaauto://판매완료" aria-disabled="true">
-            <span class="lp-name">판매완료</span>
-            <span class="lp-desc">준비 중 — 팀원 프로그램</span>
-            <span class="lp-go">곧 연결됩니다</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="panel lp-panel">
-        <div class="ph"><h2>처음 쓰는 컴퓨터</h2>
-          <span class="pnote">컴퓨터 한 대당 딱 한 번만</span></div>
-
-        <p class="lp-why">웹페이지가 프로그램을 직접 깔 수는 없습니다. 대신 <b>경로를 복사</b>해 드릴게요.
-          복사한 뒤 <b>Win + R</b> 을 누르고 <b>Ctrl + V</b> 로 붙여넣고 엔터만 치면 됩니다.</p>
-
-        <div class="lp-steps">
-          <div class="lp-step">
-            <div class="lp-stepno">1</div>
-            <div class="lp-stepbody">
-              <b>프로그램 설치하기</b>
-              <small>나스(Z:) 가 연결돼 있어야 합니다. 설치가 끝나면 프로그램이 저절로 켜집니다.</small>
-              <code class="lp-path" id="path설치">Z:\ellaboutique\★본사 2\엘라부티크_웹자동화\설치.bat</code>
-            </div>
-            <button class="lp-copy" onclick="바로가기복사('path설치',this)">경로 복사</button>
-          </div>
-
-          <div class="lp-step">
-            <div class="lp-stepno">2</div>
-            <div class="lp-stepbody">
-              <b>이미 깔려 있는데 위 버튼이 안 먹을 때</b>
-              <small>프로그램을 한 번 껐다 켜면 저절로 해결됩니다. 그래도 안 되면 이걸 두 번 누르세요.</small>
-              <code class="lp-path" id="path준비">%LOCALAPPDATA%\ella-auto\프로그램\웹버튼 준비.bat</code>
-            </div>
-            <button class="lp-copy" onclick="바로가기복사('path준비',this)">경로 복사</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel lp-panel lp-help">
-        <div class="ph"><h2>그래도 안 될 때</h2></div>
-        <ol>
-          <li><b>아무 창도 안 뜨고 조용하다면</b> — 예전에 “취소”를 눌렀을 수 있습니다.
-              주소창 오른쪽 끝 아이콘이나 왼쪽 자물쇠를 눌러 차단된 항목을 풀어주세요.</li>
-          <li><b>“이 사이트에서 열겠습니까?” 라고 물으면</b> — <b>열기</b>를 누르고
-              <b>“항상 허용”</b> 에 체크해 두면 다음부터 안 물어봅니다.</li>
-          <li><b>나스(Z:) 가 안 보이면</b> — 라이드라이브가 꺼져 있는 겁니다. 먼저 켜주세요.</li>
-        </ol>
-      </div>
-
+      <div id="바로가기몸통"></div>
     </section>
 
     <section id="sec-요약" class="sec">
@@ -840,6 +768,125 @@ function 섹션(s){ 섹=s;
   const t=document.getElementById("pageTitle"); if(t) t.textContent=섹제목[s]||"";
   그리기();
 }
+/* ════════════════════════════════════════════════════════════════
+   바로가기 — 여기 한 칸만 고치면 버튼과 설치 안내가 같이 바뀝니다.
+
+   ▸ 팀원 프로그램이 완성되면 할 일은 두 줄뿐입니다.
+       1) 아래 '칸들' 에서 그 버튼의  준비중: true  를  false  로
+       2) 아래 '설치' 에서 그 줄의  경로: ""  안에 설치 파일 경로를
+          (역슬래시 \ 는 두 번씩  \\  으로 적습니다)
+     그리고 프로그램 폴더의 '바로실행.json' 에도 같은 프로그램의
+     "실행파일" 경로를 적어야 버튼이 실제로 켭니다.
+   ══════════════════════════════════════════════════════════════ */
+const 바로가기설정 = {
+  묶음: [
+    { 제목:"보정", 곁:"사진 보정 · 썸네일", 칸들:[
+      { 종류:"하나", 열쇠:"가방", 이름:"가방",
+        설명:"엘라부티크 자동화 프로그램", 준비중:false },
+      { 종류:"묶음", 이름:"악세", 설명:"두 가지 중에서 고르세요", 안쪽:[
+        { 열쇠:"악세사리", 이름:"악세사리", 설명:"팀원 프로그램", 준비중:true },
+        { 열쇠:"의류신발", 이름:"의류 · 신발", 설명:"팀원 프로그램", 준비중:true }
+      ]}
+    ]},
+    { 제목:"플랫폼", 곁:"홈페이지 · 채널", 칸들:[
+      { 종류:"하나", 열쇠:"업로드", 이름:"업로드",
+        설명:"어드민 · 채널에 상품 올리기", 준비중:false },
+      { 종류:"하나", 열쇠:"판매완료", 이름:"판매완료",
+        설명:"팔린 상품 내리고 기록 남기기", 준비중:true }
+    ]}
+  ],
+
+  설치: [
+    { 이름:"엘라부티크 자동화 프로그램",
+      설명:"가방 보정 · 업로드. 나스(Z:) 가 연결돼 있어야 합니다. 설치가 끝나면 저절로 켜집니다.",
+      경로:"Z:\\ellaboutique\\★본사 2\\엘라부티크_웹자동화\\설치.bat" },
+
+    { 이름:"웹 버튼 준비",
+      설명:"프로그램은 깔려 있는데 위 버튼이 안 먹을 때. 보통은 프로그램을 한 번 껐다 켜면 해결됩니다.",
+      경로:"%LOCALAPPDATA%\\ella-auto\\프로그램\\웹버튼 준비.bat" },
+
+    { 이름:"악세사리 보정",      설명:"팀원이 만드는 중입니다.", 경로:"" },
+    { 이름:"의류 · 신발 보정",   설명:"팀원이 만드는 중입니다.", 경로:"" },
+    { 이름:"판매완료 처리",      설명:"팀원이 만드는 중입니다.", 경로:"" }
+  ]
+};
+
+// 글에 든 < > & 를 그대로 보이게 바꿉니다 (화면이 깨지지 않도록)
+function _글(값){
+  return String(값==null?"":값)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
+}
+
+function 바로가기그리기(){
+  const 몸통 = document.getElementById("바로가기몸통");
+  if(!몸통) return;
+  let h = "";
+
+  // ── 프로그램 버튼들 ──
+  바로가기설정.묶음.forEach(function(묶){
+    h += '<div class="panel lp-panel"><div class="ph"><h2>' + _글(묶.제목) +
+         '</h2><span class="pnote">' + _글(묶.곁 || "") + '</span></div>' +
+         '<div class="lp-grid">';
+    (묶.칸들 || []).forEach(function(칸){
+      if(칸.종류 === "묶음"){
+        h += '<div class="lp-group"><span class="lp-name">' + _글(칸.이름) +
+             '</span><span class="lp-desc">' + _글(칸.설명 || "") + '</span>' +
+             '<div class="lp-two">';
+        (칸.안쪽 || []).forEach(function(작){
+          const 중 = 작.준비중;
+          h += '<a class="lp-sub' + (중 ? ' soon' : '') + '" href="ellaauto://' +
+               encodeURIComponent(작.열쇠) + '"' + (중 ? ' aria-disabled="true"' : '') + '>' +
+               '<b>' + _글(작.이름) + '</b><small>' +
+               (중 ? '준비 중 — ' : '') + _글(작.설명 || "") + '</small></a>';
+        });
+        h += '</div></div>';
+      } else {
+        const 중 = 칸.준비중;
+        h += '<a class="lp-btn' + (중 ? ' soon' : '') + '" href="ellaauto://' +
+             encodeURIComponent(칸.열쇠) + '"' + (중 ? ' aria-disabled="true"' : '') + '>' +
+             '<span class="lp-name">' + _글(칸.이름) + '</span>' +
+             '<span class="lp-desc">' +
+             (중 ? '준비 중 — 팀원 프로그램' : _글(칸.설명 || "")) + '</span>' +
+             '<span class="lp-go">' + (중 ? '곧 연결됩니다' : '열기 →') + '</span></a>';
+      }
+    });
+    h += '</div></div>';
+  });
+
+  // ── 설치 안내 ──
+  h += '<div class="panel lp-panel"><div class="ph"><h2>처음 쓰는 컴퓨터</h2>' +
+       '<span class="pnote">컴퓨터 한 대당 딱 한 번만</span></div>' +
+       '<p class="lp-why">웹페이지가 프로그램을 직접 깔 수는 없습니다. 대신 <b>경로를 복사</b>해 드릴게요. ' +
+       '복사한 뒤 <b>Win + R</b> 을 누르고 <b>Ctrl + V</b> 로 붙여넣고 엔터만 치면 됩니다.</p>' +
+       '<div class="lp-steps">';
+  바로가기설정.설치.forEach(function(줄, i){
+    const 있음 = !!(줄.경로 || "").trim();
+    h += '<div class="lp-step' + (있음 ? '' : ' soon') + '">' +
+         '<div class="lp-stepno">' + (i + 1) + '</div>' +
+         '<div class="lp-stepbody"><b>' + _글(줄.이름) + '</b>' +
+         '<small>' + _글(줄.설명 || "") + '</small>' +
+         (있음 ? '<code class="lp-path" id="설치길' + i + '">' + _글(줄.경로) + '</code>' : '') +
+         '</div>' +
+         (있음
+           ? '<button class="lp-copy" onclick="바로가기복사(&quot;설치길' + i + '&quot;,this)">경로 복사</button>'
+           : '<span class="lp-soontag">준비 중</span>') +
+         '</div>';
+  });
+  h += '</div></div>';
+
+  // ── 그래도 안 될 때 ──
+  h += '<div class="panel lp-panel lp-help"><div class="ph"><h2>그래도 안 될 때</h2></div><ol>' +
+       '<li><b>아무 창도 안 뜨고 조용하다면</b> — 예전에 “취소”를 눌렀을 수 있습니다. ' +
+       '주소창 오른쪽 끝 아이콘이나 왼쪽 자물쇠를 눌러 차단된 항목을 풀어주세요.</li>' +
+       '<li><b>“이 사이트에서 열겠습니까?” 라고 물으면</b> — <b>열기</b>를 누르고 ' +
+       '<b>“항상 허용”</b> 에 체크해 두면 다음부터 안 물어봅니다.</li>' +
+       '<li><b>나스(Z:) 가 안 보이면</b> — 라이드라이브가 꺼져 있는 겁니다. 먼저 켜주세요.</li>' +
+       '</ol></div>';
+
+  몸통.innerHTML = h;
+}
+
 // 바로가기 화면의 [경로 복사] 단추
 function 바로가기복사(칸id, 단추){
   const 글 = (document.getElementById(칸id)||{}).textContent || "";
@@ -873,6 +920,7 @@ function 그리기(){
   if(섹==="바로가기"){
     if(_월바) _월바.style.display="none";
     if(_연도) _연도.style.display="none";
+    바로가기그리기();
     return;
   }
   if(_월바) _월바.style.display="";
